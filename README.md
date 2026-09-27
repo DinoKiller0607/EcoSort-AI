@@ -1,2 +1,2 @@
 # EcoSort-AI
-EcoSortAI is a classifier that classifies upto 4 different types of wastes
+EcoSortAI is a classifier that classifies upto four different types of wastes using Deep Learning. 
