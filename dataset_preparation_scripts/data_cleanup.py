@@ -44,7 +44,7 @@ def clean_and_standardize_dataset(dataset_path : str):
         f"Cleanup complete. Removed {removed_count} corrupt files. Converted {converted_count} images to standard 3-channel JPEGs.")
 
 # Note to user: This must be run before setting up PyTorch.
-clean_and_standardize_dataset('./data')
+clean_and_standardize_dataset('../data')
 
 import os
 from pathlib import Path
@@ -78,4 +78,4 @@ def deduplicate_dataset(dataset_dir):
     print(f"Deduplication complete. Removed {duplicates_removed} duplicate images.")
 
 
-deduplicate_dataset('./data')
+deduplicate_dataset('../data')

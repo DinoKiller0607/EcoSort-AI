@@ -54,6 +54,6 @@ def create_frozen_splits(source_dir, output_dir, test_size=0.15, val_size=0.15):
 
     print("Physical splitting complete. The test set is now frozen.")
 
-create_frozen_splits('./data', 'data')
+create_frozen_splits('../data', 'data')
 
 # this overwrites the older data folder.
