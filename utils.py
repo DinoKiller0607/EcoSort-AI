@@ -33,3 +33,32 @@ def save_model(model: torch.nn.Module,
   print(f"[INFO] Saving model to: {model_save_path}")
   torch.save(obj=model.state_dict(),
              f=model_save_path)
+
+
+def plot_loss_curves(results, compare=None):
+  """Plots loss/accuracy/precision/recall/F1 curves from engine.train() results.
+
+  Args:
+    results: dict returned by engine.train().
+    compare: optional dict {"label": [val_f1 per epoch]} drawn on the F1 panel
+      (e.g. a previous run) for side-by-side comparison.
+  """
+  import matplotlib.pyplot as plt
+
+  epochs = range(1, len(results["train_loss"]) + 1)
+  panels = [("loss", "Loss"), ("acc", "Accuracy"), ("precision", "Precision"),
+            ("recall", "Recall"), ("f1", "F1 (macro)")]
+
+  plt.figure(figsize=(18, 9))
+  for i, (key, title) in enumerate(panels, start=1):
+    plt.subplot(2, 3, i)
+    plt.plot(epochs, results[f"train_{key}"], label=f"train_{key}")
+    plt.plot(epochs, results[f"val_{key}"], label=f"val_{key}")
+    if key == "f1" and compare:
+      for label, values in compare.items():
+        plt.plot(range(1, len(values) + 1), values, linestyle="--", label=label)
+    plt.title(title)
+    plt.xlabel("Epochs")
+    plt.legend()
+  plt.tight_layout()
+  plt.show()
